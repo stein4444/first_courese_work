@@ -1,0 +1,3 @@
+Pizza 15
+potato-free 5
+shashlik 10

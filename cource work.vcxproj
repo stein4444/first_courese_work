@@ -144,6 +144,13 @@
   <ItemGroup>
     <ClInclude Include="struct.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dima" />
+    <None Include="kolya" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dishes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

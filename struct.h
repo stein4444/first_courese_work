@@ -2,32 +2,28 @@
 #include <string>
 using namespace std;
 
-struct products {
-	string products;
-	float productPrice;
+
+struct Menu {
+	string dishName;
+	float price;
 };
 
-struct dishes {
-	string dishes;
-	float dishesPrice;
-	products* products; // тут буде масив продуктів для виготовлення цієї страви
-};
-
-struct finance {
-	float money;
-	
-
+struct Users {
+	string login;
+	string password;
 };
 
 //авторизація 
-void loginStaff();
 void loginAdmin();
-void logCook();
 
 //фунціонал
-void admin();
 void staff();
 void cooker();
-void showProducts();
+void addDishes();
 void showDishes();
 void calculateFinance();
+void cooking();
+void superAmin();
+void login();
+void registrarion();
+void playerInfo();

@@ -5,61 +5,79 @@
 #include<stdlib.h>
 
 using namespace std;
+#define CLEAR system("cls");
+#define PAUSE system("pause");
+
 
 int main() {
 
-	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
-	cout << "Hello you use restaurant program" << endl;
 	int action = 0;
+start:
+	begin:
+	
+	cout << "If you want register press - 1" << endl;
+	cout << "If you want sing in press - 2" << endl;
+	cout << "Super admin menu press - 3 " << endl;
+	cout << "action>_";
+	cin >> action;
+	if (action == 1) {
+		registrarion();
+		login();
+		
+
+	}
+	else if (action == 2)
+	{
+		login();
+		
+	}
+	else if (action == 3)
+	{
+		superAmin();
+		goto begin;
+	}
+	else if (action < 1 || action > 3)
+	{
+
+		cout << "Error try again" << endl;
+		goto start;
+	}
+
+	CLEAR
+	
 	do
 	{
-		SetConsoleTextAttribute(color, 4);
-		cout << "If you want login as administrator press - 1" << endl;
-		SetConsoleTextAttribute(color, 2);
-		SetConsoleTextAttribute(color, 6);
-		cout << "If you want login as stuff press - 2" << endl;
-		SetConsoleTextAttribute(color, 2);
-		SetConsoleTextAttribute(color, 1);
-		cout << "If you want login as cooker press - 3" << endl;
-		SetConsoleTextAttribute(color, 2);
-		SetConsoleTextAttribute(color, 5);
-		cout << "If you want exit press - 4" << endl;
-		SetConsoleTextAttribute(color, 2);
-		SetConsoleTextAttribute(color, 7);
+		cout << "Press - 1 to show all statistic" << endl;
+		cout << "Press - 2 to use staff" << endl;
+		cout << "Press - 3 to use cooker" << endl;
+		cout << "If you want exit press - 5" << endl;
 		cout << "Enter your action->_ ";
-
 		cin >> action;
-		SetConsoleTextAttribute(color, 2);
-		system("CLS");
+		
+		CLEAR
 		switch (action)
 		{
 		case 1:
-			loginAdmin();
-			system("CLS");
-			admin();
-			system("CLS");
+
+			CLEAR
 			break;
 		case 2:
-			loginStaff();
-			system("CLS");
 			staff();
-			system("CLS");
+			CLEAR
 			break;
 		case 3:
-			logCook();
-			system("CLS");
 			cooker();
-			system("CLS");
+			CLEAR
+			break;
+		case 4: 
+
+			
 			break;
 		default:
 			cout << "Invalid action try to use butons from 1 - 3. Thank you!!!" << endl;
 			break;
 		}
-	} while (action != 4);
-
-	
-
-
+	} while (action != 5);
 
 	return 0;
 }
