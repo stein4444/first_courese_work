@@ -11,10 +11,15 @@ using namespace std;
 
 Menu Dish;
 Users User;
+list<Menu> MenuList;
 list<Users> UserList;
 list<Menu> DishList;
 const string Dishes = "Dishes.txt";
-
+const string PlayerStat = "stat.txt";
+const int countDish = 30;
+float sum = 0;
+string making;
+string P_Name;
 
 //авторизація
 void loginAdmin()
@@ -38,7 +43,6 @@ void loginAdmin()
 	}
 }
 
-//функціонал працівників
 void staff()
 {
 	int action = 0;
@@ -46,16 +50,17 @@ void staff()
 	{
 		cout << "If you want creat an order press - 1" << endl;
 		cout << "If you want calculate revenue press - 2" << endl;
-		cout << "If you want reser a table press - 3" << endl;
+		cout << "If you want reserve a table press - 3" << endl;
 		cout << "Back to main menu press - 4" << endl;
 		cin >> action;
 		switch (action)
 		{
 		case 1:
 			cout << "Menu: " << endl;
+			makeOrder();
 			break;
 		case 2:
-			cout << "You completed an order for: ";
+			cout << "You completed an orders for: " << sum << endl;
 
 			break;
 		case 3:
@@ -67,7 +72,7 @@ void staff()
 			cout << "Invalid action try to use butons from 1 - 6. Thank you!!!" << endl;
 			break;
 		}
-	} while (action != 3);
+	} while (action != 4);
 }
 
 void cooker()
@@ -77,8 +82,7 @@ void cooker()
 	do
 	{
 		cout << "Press - 1 to cooking " << endl;
-		cout << "Press - 2 to deny" << endl;
-		cout << "Press - 3 to exit" << endl;
+		cout << "Press - 2 to exit" << endl;
 		cout << "Enter your action>_";
 		cin >> action;
 
@@ -90,7 +94,7 @@ void cooker()
 		default:
 			break;
 		}
-	} while (action != 3);
+	} while (action != 2);
 
 
 }
@@ -101,7 +105,6 @@ void addDishes()
 
 	cout << "How many dishes you want to add: ";
 	cin >> value;
-
 	ofstream fout;
 	fout.open(Dishes, ios::app);
 	bool isOpen = fout.is_open();
@@ -116,8 +119,10 @@ void addDishes()
 
 			cout << "Enter dish prise: ";
 			cin >> Dish.price;
-			fout << Dish.dishName << " "<< Dish.price << endl;
-
+			
+			cout << "Enter dish id: ";
+			cin >> Dish.dishID;
+			fout << Dish.dishID << " "<< Dish.dishName << " " << Dish.price << endl;
 			DishList.push_back(Dish);
 		}
 
@@ -127,28 +132,25 @@ void addDishes()
 
 void showDishes()
 {
+	int count;
 	ifstream fin;
-
 	fin.open(Dishes, ios::in);
-	string str;
+	Menu dishInfo;
 	if (!fin) {
 		cout << "Cannot open file.\n";
 	}
 	else
 	{
-		while (!fin.eof())
+		int i = 0;
+		while (fin >> dishInfo.dishID >> dishInfo.dishName >> dishInfo.price)
 		{
-			fin >> str;
-			cout << str << " $" << endl;
+			i++;
+			cout << "[" << i << "]" << dishInfo.dishID << dishInfo.dishName << " - " << dishInfo.price << " $" << endl;
+			dishInfo.dishID = i;
+			MenuList.push_back(dishInfo);
 		}
 	}
-
-}
-
-
-// фінанси
-void calculateFinance()
-{
+	fin.close();
 }
 
 void cooking()
@@ -160,7 +162,7 @@ void cooking()
 		cout << "time: " << i << endl;
 		Sleep(500);
 	}
-	cout << "You have successfully cooked" << endl;
+	cout << "You have successfully cooked: "<< making << endl;
 	
 }
 
@@ -209,7 +211,7 @@ void registrarion()
 	UserList.push_back(User);
 	ofstream fout;
 	string UserName = User.login;
-	
+
 	fout.open(UserName, ios::app);
 
 	bool isOpen = fout.is_open();
@@ -223,16 +225,17 @@ void registrarion()
 	}
 	fout.close();
 	cout << "You successfully registered" << endl;
+	
 	PAUSE
 		CLEAR
 }
 
 void login()
 {
-	string login, password, log, pw;
+	string password, log, pw;
 start:
 	cout << "Enter your login: ";
-	cin >> login;
+	cin >> P_Name;
 	cout << "Enter your password: ";
 	cin >> password;
 	
@@ -240,7 +243,7 @@ start:
 
 	ifstream fin;
 	
-	fin.open(login, ios::in);
+	fin.open(P_Name, ios::in);
 	if (!fin) {
 		cout << "Cannot open file.\n";
 	}
@@ -249,7 +252,7 @@ start:
 		getline(fin, log);
 		getline(fin, pw);
 	}
-	if (login == log && password == pw) {
+	if (P_Name == log && password == pw) {
 		cout << "Hello " << login << endl;
 	}
 	else
@@ -262,4 +265,64 @@ start:
 
 void playerInfo()
 {
+	ofstream fout;
+	fout.open(PlayerStat, ios:: app);
+	bool isOpen = fout.is_open();
+	if (isOpen == false) {
+		cout << "Error: Application can't connecting to database file!" << endl;
+	}
+	else {
+		fout << P_Name << " "<<  sum << endl;
+	}
+	fout.close();
+	PAUSE
+		CLEAR
 }
+
+void makeOrder()
+{
+	showDishes();
+	int count;
+	float price;
+	cout << "Choose Dish number->_";
+		cin >> count;
+		for (Menu item : MenuList) {
+			if (item.dishID == count) {
+				cout << item.dishName << " - " << item.price << " $" << endl;
+				price = item.price;
+				making = item.dishName;
+			}
+			
+		}
+		
+		cout << "Price: " << price << " $" << endl;
+		sum += price;
+		playerInfo();
+	}
+
+void tables()
+{
+}
+
+void showStat()
+{
+	ifstream fin;
+	string name;
+	int stat;
+	int i = 1;
+	fin.open(PlayerStat, ios::app);
+	bool isOpen = fin.is_open();
+	if (isOpen == false) {
+		cout << "Error: Application can't connecting to database file!" << endl;
+	}
+	else
+	{
+		while (fin >> name >> stat) {
+			cout << "[" << i << "]" << name << " - " << stat << endl;
+		}
+
+	}
+
+	fin.close();
+}
+	

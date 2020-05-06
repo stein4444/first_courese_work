@@ -1,3 +1,4 @@
-Pizza 15
-potato-free 5
-shashlik 10
+1 pizza 10
+2 bureger 5
+3 potato-free 3
+4 sushi 10

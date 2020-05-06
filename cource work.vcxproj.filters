@@ -29,9 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="kolya" />
-    <None Include="dima" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dishes.txt" />
+    <Text Include="stat.txt" />
   </ItemGroup>
 </Project>

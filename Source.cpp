@@ -58,8 +58,9 @@ start:
 		switch (action)
 		{
 		case 1:
-
 			CLEAR
+			showStat();
+			
 			break;
 		case 2:
 			staff();
