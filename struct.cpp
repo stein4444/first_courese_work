@@ -1,14 +1,22 @@
-#include "struct.h"
-#include <iostream>
-#include <string>
-#include <windows.h> 
+#include"struct.h"
+#include<iostream>
+#include<string>
+#include<windows.h> 
 #include<list>
-#include <fstream>
+#include<fstream>
+
 
 using namespace std;
+
+HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+//defines
 #define CLEAR system("cls");
 #define PAUSE system("pause");
-
+#define defaultClour SetConsoleTextAttribute(color, 2);
+#define blue SetConsoleTextAttribute(color, 1);
+#define red SetConsoleTextAttribute(color, 4);
+#define purple SetConsoleTextAttribute(color, 5);
+// 
 Menu Dish;
 Users User;
 list<Menu> MenuList;
@@ -17,17 +25,17 @@ list<Menu> DishList;
 const string Dishes = "Dishes.txt";
 const string PlayerStat = "stat.txt";
 const int countDish = 30;
+int countDishes;
 float sum = 0;
 string making;
 string P_Name;
-
-//авторизація
+//авторизація super admin
 void loginAdmin()
 {
 
 	string login;
 	string passwd;
-	start:
+start:
 	cout << "Enter your login: _____\b\b\b\b\b";
 	cin >> login;
 	cout << endl;
@@ -41,17 +49,25 @@ void loginAdmin()
 		cout << "try again" << endl;
 		goto start;
 	}
+	CLEAR
 }
 
 void staff()
 {
+	int number = 0;
 	int action = 0;
 	do
 	{
-		cout << "If you want creat an order press - 1" << endl;
-		cout << "If you want calculate revenue press - 2" << endl;
-		cout << "If you want reserve a table press - 3" << endl;
-		cout << "Back to main menu press - 4" << endl;
+		cout << "******************************************" << endl;
+		cout << "|If you want creat an order press - 1    |" << endl;
+		cout << "******************************************" << endl;
+		cout << "|If you want calculate revenue press - 2 |" << endl;
+		cout << "******************************************" << endl;
+		cout << "|If you want reserve a table press - 3   |" << endl;
+		cout << "******************************************" << endl;
+		cout << "|Back to main menu press - 4             |" << endl;
+		cout << "******************************************" << endl;
+		cout << "Enter your action->_";
 		cin >> action;
 		switch (action)
 		{
@@ -60,11 +76,15 @@ void staff()
 			makeOrder();
 			break;
 		case 2:
-			cout << "You completed an orders for: " << sum << endl;
-
+			cout << "You completed " << countDishes << "orders for: " << sum << endl;
+			
 			break;
 		case 3:
 			cout << "Table reservation: " << endl;
+			showTables();
+			cout << "Enter numb of table->_";
+			cin >> number;
+			tables(number);
 		case 4:
 			cout << "By by see you later!!!" << endl;
 			break;
@@ -77,7 +97,8 @@ void staff()
 
 void cooker()
 {
-	
+	CLEAR
+
 	int action = 0;
 	do
 	{
@@ -119,19 +140,21 @@ void addDishes()
 
 			cout << "Enter dish prise: ";
 			cin >> Dish.price;
-			
+
 			cout << "Enter dish id: ";
 			cin >> Dish.dishID;
-			fout << Dish.dishID << " "<< Dish.dishName << " " << Dish.price << endl;
+			fout << Dish.dishID << " " << Dish.dishName << " " << Dish.price << endl;
 			DishList.push_back(Dish);
 		}
 
 
 	fout.close();
+	CLEAR
 }
 
 void showDishes()
 {
+	CLEAR
 	int count;
 	ifstream fin;
 	fin.open(Dishes, ios::in);
@@ -155,22 +178,22 @@ void showDishes()
 
 void cooking()
 {
-
+	CLEAR
 	int time = 10;
 	int i = 0;
 	for (i = time; i; i--) {
 		cout << "time: " << i << endl;
 		Sleep(500);
 	}
-	cout << "You have successfully cooked: "<< making << endl;
-	
+	cout << "You have successfully cooked: " << making << endl;
+
 }
 
 
 void superAmin()
 {
 	CLEAR
-	loginAdmin();
+		loginAdmin();
 	int action = 0;
 	do
 	{
@@ -179,16 +202,16 @@ void superAmin()
 		cout << "Press - 3 to exit" << endl;
 		cout << "Choose an action->_";
 		cin >> action;
+		CLEAR
 		switch (action)
 		{
 
 		case 1:
-			CLEAR
-			addDishes();
+				addDishes();
 			break;
 
 		case 2:
-			
+
 			showDishes();
 			break;
 		default:
@@ -225,24 +248,25 @@ void registrarion()
 	}
 	fout.close();
 	cout << "You successfully registered" << endl;
-	
+
 	PAUSE
 		CLEAR
 }
 
 void login()
 {
+	CLEAR
 	string password, log, pw;
 start:
 	cout << "Enter your login: ";
 	cin >> P_Name;
 	cout << "Enter your password: ";
 	cin >> password;
-	
+
 
 
 	ifstream fin;
-	
+
 	fin.open(P_Name, ios::in);
 	if (!fin) {
 		cout << "Cannot open file.\n";
@@ -265,49 +289,93 @@ start:
 
 void playerInfo()
 {
+	
 	ofstream fout;
-	fout.open(PlayerStat, ios:: app);
+	fout.open(PlayerStat, ios::app);
 	bool isOpen = fout.is_open();
 	if (isOpen == false) {
 		cout << "Error: Application can't connecting to database file!" << endl;
 	}
 	else {
-		fout << P_Name << " "<<  sum << endl;
+		fout << P_Name << " " << sum << " " << countDishes << endl;
 	}
 	fout.close();
-	PAUSE
-		CLEAR
+	
 }
 
 void makeOrder()
 {
+	CLEAR
 	showDishes();
 	int count;
 	float price;
 	cout << "Choose Dish number->_";
-		cin >> count;
-		for (Menu item : MenuList) {
-			if (item.dishID == count) {
-				cout << item.dishName << " - " << item.price << " $" << endl;
-				price = item.price;
-				making = item.dishName;
-			}
-			
+	cin >> count;
+	for (Menu item : MenuList) {
+		if (item.dishID == count) {
+			cout << item.dishName << " - " << item.price << " $" << endl;
+			price = item.price;
+			making = item.dishName;
 		}
-		
-		cout << "Price: " << price << " $" << endl;
-		sum += price;
-		playerInfo();
+
 	}
 
-void tables()
+	cout << "Price: " << price << " $" << endl;
+	sum += price;
+	countDishes++;
+
+	playerInfo();
+}
+
+void tables(int numb)
 {
+	CLEAR
+	blue;
+	if (numb == 1) {
+		red;
+		cout << "You reserved table #1" << endl;
+		cout << " ************" << endl;
+		cout << " * table: 1 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+	}
+	
+	if (numb == 2) {
+		red;
+		cout << "You reserved table #2" << endl;
+		cout << " ************" << endl;
+		cout << " * table: 2 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+	}
+	if (numb == 3) {
+		red;
+		cout << "You reserved table #3" << endl;
+		cout << " ************" << endl;
+		cout << " * table: 3 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+	}
+	
+	if (numb == 4) {
+		red;
+		cout << "You reserved table #4" << endl;
+		cout << " ************" << endl;
+		cout << " * table: 4 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl << endl << endl;
+	}
+	defaultClour;
+	
 }
 
 void showStat()
 {
+	
 	ifstream fin;
 	string name;
+	int count;
 	int stat;
 	int i = 1;
 	fin.open(PlayerStat, ios::app);
@@ -317,12 +385,38 @@ void showStat()
 	}
 	else
 	{
-		while (fin >> name >> stat) {
-			cout << "[" << i << "]" << name << " - " << stat << endl;
+		while (fin >> name >> stat >> count) {
+			cout << "[" << i << "]" << name << " - " << stat << " - " << count << endl;
 		}
 
 	}
 
 	fin.close();
 }
-	
+
+void showTables()
+{
+	CLEAR
+	blue;
+	cout << " ************" << endl;
+	cout << " * table: 1 *" << endl;
+	cout << " *          *" << endl;
+	cout << " *          *" << endl;
+
+	cout << " ************" << endl;
+	cout << " * table: 2 *" << endl;
+	cout << " *          *" << endl;
+	cout << " *          *" << endl;
+
+	cout << " ************" << endl;
+	cout << " * table: 3 *" << endl;
+	cout << " *          *" << endl;
+	cout << " *          *" << endl;
+
+	cout << " ************" << endl;
+	cout << " * table: 4 *" << endl;
+	cout << " *          *" << endl;
+	cout << " *          *" << endl;
+	defaultClour;
+
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include<windows.h>
 using namespace std;
 
 
@@ -15,7 +16,6 @@ struct Users {
 };
 
 
-
 void loginAdmin();
 void staff();
 void cooker();
@@ -27,5 +27,6 @@ void login();
 void registrarion();
 void playerInfo();
 void makeOrder();
-void tables();
+void tables(int numb);
 void showStat();
+void showTables();
