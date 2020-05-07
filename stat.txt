@@ -1,1 +1,2 @@
 kolya 3 1
+vitya 5 1

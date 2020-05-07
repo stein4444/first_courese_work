@@ -15,44 +15,43 @@ int main() {
 	int action2 = 0;
 	do
 	{
-
-
-
 	start:
-	cout << "*********************************" << endl;
-	cout << "|If you want register press [1] |" << endl;
-	cout << "*********************************" << endl;
-	cout << "|If you want sing in press  [2] |" << endl;
-	cout << "*********************************" << endl;
-	cout << "|Super admin menu press     [3] |" << endl;
-	cout << "*********************************" << endl;
-	cout << "|If you want exit press     [4] |" << endl;
-	cout << "*********************************" << endl;
+		cout << "*********************************" << endl;
+		cout << "|If you want register press [1] |" << endl;
+		cout << "*********************************" << endl;
+		cout << "|If you want sing in press  [2] |" << endl;
+		cout << "*********************************" << endl;
+		cout << "|Super admin menu press     [3] |" << endl;
+		cout << "*********************************" << endl;
+		cout << "|If you want exit press     [4] |" << endl;
+		cout << "*********************************" << endl;
 
-	cout << "Choose yhour action>_";
-	cin >> action1;
-	switch (action1)
-	{
-	case 1:
-		registrarion();
-		login();
-		break;
+		cout << "Choose yhour action>_";
+		cin >> action1;
+		switch (action1)
+		{
+		case 1:
+			
+			registrarion();
+			login();
+			break;
 
-	case 2:
-		login();
-		break;
-	case 3: 
-		superAmin();
-		goto start;
-		break;
-	case 4:
-		continue;
-	default:
-		cout << "Error try again" << endl;
-		break;
-	}
+		case 2:
+			
+			login();
+			break;
+		case 3:
+			superAmin();
+			goto start;
+			break;
+		case 4:
+			continue;
+		default:
+			cout << "Error try again" << endl;
+			break;
+		}
 
-	CLEAR
+	
 	
 	do
 	{
@@ -72,7 +71,10 @@ int main() {
 		switch (action2)
 		{
 		case 1:
-			CLEAR
+			CLEAR;
+			cout << "*****************" << endl;
+			cout << "| _-STATISTIC-_ |" << endl;
+			cout << "*****************" << endl;
 			showStat();
 			
 			break;

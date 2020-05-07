@@ -3,3 +3,4 @@
 3 potato-free 3
 4 sushi 10
 5 kebab 6
+6 borshch 12

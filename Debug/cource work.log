@@ -1,2 +1,3 @@
-﻿  Source.cpp
+﻿  struct.cpp
+E:\hm\cource work\struct.cpp(157,7): warning C4101: 'count': unreferenced local variable
   cource work.vcxproj -> E:\hm\cource work\Debug\cource work.exe

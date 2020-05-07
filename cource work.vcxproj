@@ -147,6 +147,7 @@
   <ItemGroup>
     <None Include="dima" />
     <None Include="kolya" />
+    <None Include="vasia" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dishes.txt" />

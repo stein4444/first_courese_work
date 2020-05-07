@@ -30,6 +30,7 @@
   <ItemGroup>
     <None Include="kolya" />
     <None Include="dima" />
+    <None Include="vasia" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dishes.txt" />

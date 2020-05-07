@@ -5,7 +5,6 @@
 #include<list>
 #include<fstream>
 
-
 using namespace std;
 
 HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -51,7 +50,7 @@ start:
 	}
 	CLEAR
 }
-
+//функціонал 
 void staff()
 {
 	int number = 0;
@@ -77,7 +76,7 @@ void staff()
 			break;
 		case 2:
 			cout << "You completed " << countDishes << "orders for: " << sum << endl;
-			
+
 			break;
 		case 3:
 			cout << "Table reservation: " << endl;
@@ -99,7 +98,7 @@ void cooker()
 {
 	CLEAR
 
-	int action = 0;
+		int action = 0;
 	do
 	{
 		cout << "Press - 1 to cooking " << endl;
@@ -155,7 +154,7 @@ void addDishes()
 void showDishes()
 {
 	CLEAR
-	int count;
+		int count;
 	ifstream fin;
 	fin.open(Dishes, ios::in);
 	Menu dishInfo;
@@ -179,7 +178,7 @@ void showDishes()
 void cooking()
 {
 	CLEAR
-	int time = 10;
+		int time = 10;
 	int i = 0;
 	for (i = time; i; i--) {
 		cout << "time: " << i << endl;
@@ -203,34 +202,37 @@ void superAmin()
 		cout << "Choose an action->_";
 		cin >> action;
 		CLEAR
-		switch (action)
-		{
+			switch (action)
+			{
 
-		case 1:
+			case 1:
 				addDishes();
-			break;
+				break;
 
-		case 2:
+			case 2:
 
-			showDishes();
-			break;
-		default:
-			break;
-		}
+				showDishes();
+				break;
+			default:
+				break;
+			}
 
 
 	} while (action != 3);
 
 }
-
+// реєстрація 
 void registrarion()
 {
-
-	cout << "Enter your name: ";
+	CLEAR
+	cout << " ***********************" << endl;
+	cout << " |Enter your name: ";
 	cin >> User.login;
-
-	cout << "Enter your password: ";
+	cout << " ***********************" << endl;
+	cout << " |Enter your password: ";
+	
 	cin >> User.password;
+	cout << " ***********************" << endl;
 	UserList.push_back(User);
 	ofstream fout;
 	string UserName = User.login;
@@ -252,18 +254,20 @@ void registrarion()
 	PAUSE
 		CLEAR
 }
-
+//вхід
 void login()
 {
 	CLEAR
-	string password, log, pw;
+		string password, log, pw;
 start:
-	cout << "Enter your login: ";
+	cout << " ***********************" << endl;
+	cout << " |Enter your login:    | ";
 	cin >> P_Name;
-	cout << "Enter your password: ";
+	cout << " ***********************" << endl;
+	cout << " |Enter your password: | ";
 	cin >> password;
-
-
+	cout << " ***********************" << endl;
+	int action = 0;
 
 	ifstream fin;
 
@@ -279,17 +283,35 @@ start:
 	if (P_Name == log && password == pw) {
 		cout << "Hello " << login << endl;
 	}
-	else
+	else if (P_Name != log && password != pw)
 	{
-		cout << "Error try again" << endl;
-		goto start;
+		back:
+		cout << "Error try again or create new account" << endl;
+		cout << "1 - try agin 2 - register" << endl;
+		cout << "action->_";
+		cin >> action;
+		if (action == 1) {
+			goto start;
+		}
+		else if (action == 2) {
+			registrarion();
+		}
+		else {
+			goto back;
+		}
+
+		
 	}
+	CLEAR
+	cout << "*********" << endl;
+	cout << "| Hello |  |" << P_Name<< " |" << endl;
+	cout << "*********" << endl;
 	fin.close();
 }
-
+//інформація 
 void playerInfo()
 {
-	
+
 	ofstream fout;
 	fout.open(PlayerStat, ios::app);
 	bool isOpen = fout.is_open();
@@ -300,13 +322,13 @@ void playerInfo()
 		fout << P_Name << " " << sum << " " << countDishes << endl;
 	}
 	fout.close();
-	
-}
 
+}
+// створення замовлення 
 void makeOrder()
 {
 	CLEAR
-	showDishes();
+		showDishes();
 	int count;
 	float price;
 	cout << "Choose Dish number->_";
@@ -330,7 +352,7 @@ void makeOrder()
 void tables(int numb)
 {
 	CLEAR
-	blue;
+		blue;
 	if (numb == 1) {
 		red;
 		cout << "You reserved table #1" << endl;
@@ -338,27 +360,87 @@ void tables(int numb)
 		cout << " * table: 1 *" << endl;
 		cout << " *          *" << endl;
 		cout << " *          *" << endl;
+		blue;
+		cout << " ************" << endl;
+		cout << " * table: 2 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 3 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 4 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
 	}
-	
-	if (numb == 2) {
+
+	else if (numb == 2) {
+
+		cout << " ************" << endl;
+		cout << " * table: 1 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
 		red;
 		cout << "You reserved table #2" << endl;
 		cout << " ************" << endl;
 		cout << " * table: 2 *" << endl;
 		cout << " *          *" << endl;
 		cout << " *          *" << endl;
+		blue;
+		cout << " ************" << endl;
+		cout << " * table: 3 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 4 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
 
 	}
 	if (numb == 3) {
+		cout << " ************" << endl;
+		cout << " * table: 1 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 2 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
 		red;
 		cout << "You reserved table #3" << endl;
 		cout << " ************" << endl;
 		cout << " * table: 3 *" << endl;
 		cout << " *          *" << endl;
 		cout << " *          *" << endl;
+		blue;
+		cout << "You reserved table #4" << endl;
+		cout << " ************" << endl;
+		cout << " * table: 4 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl << endl << endl;
 	}
-	
+
 	if (numb == 4) {
+		cout << " ************" << endl;
+		cout << " * table: 1 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 2 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
+
+		cout << " ************" << endl;
+		cout << " * table: 3 *" << endl;
+		cout << " *          *" << endl;
+		cout << " *          *" << endl;
 		red;
 		cout << "You reserved table #4" << endl;
 		cout << " ************" << endl;
@@ -367,12 +449,12 @@ void tables(int numb)
 		cout << " *          *" << endl << endl << endl;
 	}
 	defaultClour;
-	
-}
 
+}
+//вивід інформації
 void showStat()
 {
-	
+
 	ifstream fin;
 	string name;
 	int count;
@@ -386,7 +468,7 @@ void showStat()
 	else
 	{
 		while (fin >> name >> stat >> count) {
-			cout << "[" << i << "]" << name << " - " << stat << " - " << count << endl;
+			cout << "[" << i << "]" << name << " made "<< count<<" ofers for " << stat << " $"  << endl;
 		}
 
 	}
@@ -397,7 +479,7 @@ void showStat()
 void showTables()
 {
 	CLEAR
-	blue;
+		blue;
 	cout << " ************" << endl;
 	cout << " * table: 1 *" << endl;
 	cout << " *          *" << endl;
